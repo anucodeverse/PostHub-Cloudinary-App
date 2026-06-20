@@ -15,6 +15,7 @@
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.18.0",
     "streamifier": "^0.1.1"
+    
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
