@@ -4,29 +4,32 @@ import { createPost } from "../services/api";
 function CreatePost() {
   const handleAddPost = async (post) => {
     try {
+      // optional: disable double submit later if needed
       await createPost({
         ...post,
         authorId: "6a30ece2f1a10c5ffeea17fa",
       });
 
       alert("✅ Post Created Successfully!");
+
+      // optional improvement: reset or redirect can be added here
+      // window.location.href = "/posts";
     } catch (error) {
-      alert(error.message);
+      console.error("Create post error:", error);
+      alert(error.message || "Something went wrong while creating post");
     }
   };
 
   return (
     <div className="create-page">
-  <div className="create-container">
-    <h1>Create New Post</h1>
+      <div className="create-container">
+        <h1>Create New Post</h1>
 
-    <p>
-      Share your story with the community.
-    </p>
+        <p>Share your story with the community.</p>
 
-    <PostForm onAddPost={handleAddPost} />
-  </div>
-</div>
+        <PostForm onAddPost={handleAddPost} />
+      </div>
+    </div>
   );
 }
 

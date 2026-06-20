@@ -2,16 +2,31 @@ const BASE_URL = "https://blogapicluster-6two.onrender.com";
 
 
 // ========================
+// HELPER (SAFE RESPONSE HANDLER)
+// ========================
+const handleResponse = async (response) => {
+  const contentType = response.headers.get("content-type");
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(text || "Request failed");
+  }
+
+  if (!contentType || !contentType.includes("application/json")) {
+    const text = await response.text();
+    throw new Error("Server returned non-JSON response: " + text);
+  }
+
+  return response.json();
+};
+
+
+// ========================
 // POSTS
 // ========================
 export const getPosts = async () => {
   const response = await fetch(`${BASE_URL}/posts`);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch posts");
-  }
-
-  return response.json();
+  return handleResponse(response);
 };
 
 
@@ -31,13 +46,7 @@ export const createPost = async (postData) => {
     body: formData,
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Failed to create post");
-  }
-
-  return data;
+  return handleResponse(response);
 };
 
 
@@ -46,13 +55,7 @@ export const deletePost = async (id) => {
     method: "DELETE",
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Failed to delete post");
-  }
-
-  return data;
+  return handleResponse(response);
 };
 
 
@@ -61,10 +64,5 @@ export const deletePost = async (id) => {
 // ========================
 export const getUsers = async () => {
   const response = await fetch(`${BASE_URL}/users`);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch users");
-  }
-
-  return response.json();
+  return handleResponse(response);
 };
