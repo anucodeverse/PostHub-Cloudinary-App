@@ -37,10 +37,9 @@ export const createPost = async (postData) => {
   formData.append("content", postData.content);
   formData.append("authorId", postData.authorId);
 
-  if (postData.image) {
-    formData.append("image", postData.image);
-  }
-
+if (postData.image && postData.image instanceof File) {
+  formData.append("image", postData.image);
+}
   const response = await fetch(`${BASE_URL}/posts`, {
     method: "POST",
     body: formData,
