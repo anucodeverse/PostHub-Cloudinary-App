@@ -1,7 +1,12 @@
-const API_URL = "http://localhost:5000/posts";
+// ✅ Production backend URL
+const API = "https://blogapicluster-6two.onrender.com/api";
 
+
+// ========================
+// GET ALL POSTS
+// ========================
 export const getPosts = async () => {
-  const response = await fetch(API_URL);
+  const response = await fetch(API);
 
   if (!response.ok) {
     throw new Error("Failed to fetch posts");
@@ -10,6 +15,10 @@ export const getPosts = async () => {
   return response.json();
 };
 
+
+// ========================
+// CREATE POST
+// ========================
 export const createPost = async (postData) => {
   const formData = new FormData();
 
@@ -21,7 +30,7 @@ export const createPost = async (postData) => {
     formData.append("image", postData.image);
   }
 
-  const response = await fetch(API_URL, {
+  const response = await fetch(API, {
     method: "POST",
     body: formData,
   });
@@ -35,8 +44,12 @@ export const createPost = async (postData) => {
   return data;
 };
 
+
+// ========================
+// DELETE POST
+// ========================
 export const deletePost = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`, {
+  const response = await fetch(`${API}/${id}`, {
     method: "DELETE",
   });
 
@@ -49,8 +62,12 @@ export const deletePost = async (id) => {
   return data;
 };
 
+
+// ========================
+// GET USERS
+// ========================
 export const getUsers = async () => {
-  const response = await fetch("http://localhost:5000/users");
+  const response = await fetch(`${API}/users`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch users");
