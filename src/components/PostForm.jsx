@@ -5,25 +5,28 @@ function PostForm({ onAddPost }) {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const fileInputRef = useRef();
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = (e) => {
+  e.preventDefault();
 
-    if (!title.trim() || !content.trim()) {
-      alert("Title and Content are required");
-      return;
-    }
+  if (!title.trim() || !content.trim()) {
+    alert("Title and Content are required");
+    return;
+  }
 
-    onAddPost({
-      title,
-      content,
-      image,
-    });
+  onAddPost({
+    title,
+    content,
+    image: image || null, // safe fallback
+  });
 
-    setTitle("");
-    setContent("");
-    setImage(null);
+  setTitle("");
+  setContent("");
+  setImage(null);
+
+  if (fileInputRef.current) {
     fileInputRef.current.value = "";
-  };
+  }
+};
 
   return (
     <form className="form-card" onSubmit={handleSubmit}>
