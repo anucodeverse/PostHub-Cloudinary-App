@@ -63,7 +63,7 @@ src/
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone <https://github.com/anucodeverse/PostHub-Cloudinary-App>
 ```
 
 Navigate to project:
@@ -116,7 +116,7 @@ Cloud Storage:
 
 * Cloudinary
 
-## 🧪 Testing Checklist
+##  Testing Checklist
 
 ✔ Fetch posts from backend
 
@@ -136,7 +136,7 @@ Cloud Storage:
 
 ## 📸 Application Screenshots
 
-### 🏠 Home Page
+###  Home Page
 
 ![Home Page](./images/home.png)
 ![Home Page](./images/home1.png)
